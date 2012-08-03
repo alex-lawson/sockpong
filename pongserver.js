@@ -163,4 +163,4 @@ function clampint(toclamp, lbound, ubound) {
 
 // start main game loop
 newgame();
-var gameloop = setInterval(doupdate, 100);
+var gameloop = setInterval(doupdate, 50);

@@ -6,7 +6,7 @@ function connectsocket() {
     // When the connection is open, send some data to the server
     connection.onopen = function () {
         console.log("Connected to "+servloc)
-        connection.send('Ping'); // Send the message 'Ping' to the server
+        //connection.send('Ping'); // Send the message 'Ping' to the server
     };
 
     // Log errors
@@ -137,7 +137,7 @@ paddle2.update = function(newx) {
 }
 
 ball = {};
-ball.r = 10;
+ball.r = 13;
 ball.init = function() {
     var start_x = pong.width / 2;
     var start_y = pong.height / 2;
