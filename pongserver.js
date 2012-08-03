@@ -40,6 +40,21 @@ wsServer.on('request', function(request) {
     });
 });
 
+// send game state to clients as json array
+function sendtoclients() {
+    var gamestate = {
+        p1x:p1x,
+        p2x:p2x,
+        ballx:ballx,
+        bally:bally,
+    }
+    
+    var json = JSON.stringify({type:'update', gamestate:gamestate});
+    for (var i=0; i < clients.length; i++) {
+        clients[i].sendUTF(json);
+    }
+}
+
 var p1x = 250;
 var p2x = 250;
 var p1vx = 0;
@@ -51,24 +66,45 @@ var ballvy = 1;
 
 // looped game logic
 function doupdate() {
-    
-    
+    moveobjects();
+    testcollide();
+    sendtoclients();
 };
 
 //update positions
 function moveobjects() {
     //paddles
+    p1x += p1vx;
+    p2x += p2vx;
     
     //ball
-    
+    ballx += ballvx;
+    bally += ballvy;
 }
 
 //check for collision
 function testcollide() {
     //paddles
+    p1x = clampint(p1x, 0, 500);
+    p2x = clampint(p2x, 0, 500);
     
     //ball
+    if (ballx > 500 || ballx < 0) {
+        ballvx = -ballvx;
+        ballx = clampint(ballx, 0, 500);
+    }
+    if (bally > 500 || bally < 0) {
+        ballvy = -ballvy;
+        bally = clampint(bally, 0, 500);
+    }
+}
+
+//clamp toclamp within lbound and ubound
+function clampint(toclamp, lbound, ubound) {
+    if (toclamp > ubound) return ubound;
+    else if (toclamp < lbound) return lbound;
+    else return toclamp;
 }
 
 // start main game loop
-var gameloop = setInterval(doupdate(), 100);
+var gameloop = setInterval(doupdate, 100);
