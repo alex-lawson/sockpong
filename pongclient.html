@@ -5,6 +5,18 @@
         <script src='jquery_1-7-2.js'></script>
         <script src='pongclient.js'></script>
         <LINK href="pongclient.css" rel="stylesheet" type="text/css">
+        
+     <script>
+      window.onload = function() {
+        
+        
+        pong.init();
+                
+        
+      };
+
+    </script>
+    
     </head>
     <body>
         <input id='testip' type='text' value='127.0.0.1:1337' />
@@ -13,10 +25,10 @@
         <button id="testbut" onclick="testsocket()">send test</button>
         <h2>Test Result:</h2>
         <div id="testlabel">(result goes here)</div>
-        <div id="pong" class="playfield">
-            <div id="paddle1" class="paddle">(nobody)</div>
-            <div id="ball" class="ball"></div>
-            <div id="paddle2" class="paddle">(nobody)</div>
-        </div>
+                
+        <canvas id="playfield" width="600" height="600">
+            
+            
+        </canvas>
     </body>
 </html>
