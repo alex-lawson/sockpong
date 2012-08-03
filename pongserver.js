@@ -89,8 +89,8 @@ function resetpos() {
     p2vx = 0;
     ballx = 250;
     bally = 250;
-    ballvx = 1;
-    ballvy = 1;
+    ballvx = 3;
+    ballvy = 5;
 }
 
 // looped game logic
@@ -113,6 +113,8 @@ function moveobjects() {
 
 //check for collision
 function testcollide() {
+    var br = 15;
+
     //paddles with screen edge
     p1x = clampint(p1x, 0, 500);
     p2x = clampint(p2x, 0, 500);
@@ -132,12 +134,12 @@ function testcollide() {
     }
     
     //ball with screen edge
-    if (ballx > 500 || ballx < 0) { //out on the sides
+    if (ballx + br > 500 || ballx - br < 0) { //out on the sides
         ballvx = -ballvx;
-        ballx = clampint(ballx, 0, 500);
+        ballx = clampint(ballx, br, 500 - br);
     }
-    if (bally > 500 || bally < 0) { //out on the top or bottom (someone scored!)
-        if (bally > 500) {
+    if (bally + br > 500 || bally - br < 0) { //out on the top or bottom (someone scored!)
+        /* if (bally > 500) {
             p1score++;
             console.log("Point for Player 1! Score: "+p1score+" to "+p2score);
         }
@@ -145,10 +147,10 @@ function testcollide() {
             p2score++;
             console.log("Point for Player 2! Score: "+p1score+" to "+p2score);
         }
-        resetpos();
+        resetpos(); */
         
-        //ballvy = -ballvy;
-        //bally = clampint(bally, 0, 500);
+        ballvy = -ballvy;
+        bally = clampint(bally, br, 500 - br);
     }
 }
 
