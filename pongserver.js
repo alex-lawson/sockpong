@@ -20,8 +20,8 @@ var ballvx = 0;
 var ballvy = 0;
 
 var server = http.createServer(function(request, response) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Things are heating up!  The score is '+p1score+' to '+p2score'!');
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Things are heating up!  The score is '+p1score+' to '+p2score+'!\n');
 });
 server.listen(port, function() { });
 
