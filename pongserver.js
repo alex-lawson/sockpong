@@ -20,8 +20,8 @@ var ballvx = 0;
 var ballvy = 0;
 
 var server = http.createServer(function(request, response) {
-    // process HTTP request. Since we're writing just WebSockets server
-    // we don't have to implement anything.
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Things are heating up!  The score is '+p1score+' to '+p2score'!');
 });
 server.listen(port, function() { });
 
@@ -44,11 +44,11 @@ wsServer.on('request', function(request) {
     // This is the most important callback for us, we'll handle
     // all messages from users here.
     connection.on('message', function(message) {
-        if (message.type === 'utf8') {
+        //if (message.type === 'utf8') {
             // process WebSocket message
             console.log(message.utf8Data);
             connection.sendUTF(message.utf8Data);
-        }
+        //}
     });
 
     connection.on('close', function(connection) {
